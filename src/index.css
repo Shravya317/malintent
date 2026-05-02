@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* ── MalIntent Design System ────────────────────────────────────── */
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Core palette */
+  --color-gunmetal-950: #0a0e14;
+  --color-gunmetal-900: #0d1117;
+  --color-gunmetal-800: #151b23;
+  --color-gunmetal-700: #1c2432;
+  --color-gunmetal-600: #243042;
+
+  /* Accent: Threat Red */
+  --color-threat-500: #ff2d55;
+  --color-threat-400: #ff4d6f;
+  --color-threat-300: #ff7a94;
+  --color-threat-600: #e60033;
+  --color-threat-glow: #ff2d5540;
+
+  /* Accent: Secure Teal */
+  --color-secure-500: #00d4aa;
+  --color-secure-400: #00e6bb;
+  --color-secure-300: #33f0d0;
+  --color-secure-600: #00b894;
+  --color-secure-glow: #00d4aa40;
+
+  /* Accent: Warning Amber */
+  --color-warn-500: #ffb020;
+  --color-warn-400: #ffc04d;
+  --color-warn-glow: #ffb02040;
+
+  /* Accent: Info Blue */
+  --color-info-500: #3b82f6;
+  --color-info-400: #60a5fa;
+  --color-info-glow: #3b82f640;
+}
+
+/* ── Base Resets ──────────────────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gunmetal-600) transparent;
+}
+
+html {
+  background-color: var(--color-gunmetal-950);
+  color: #e2e8f0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ── Glassmorphism Utility ───────────────────────────────────── */
+
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-hover:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Glow Effects ────────────────────────────────────────────── */
+
+.glow-red {
+  box-shadow: 0 0 20px var(--color-threat-glow), 
+              0 0 60px rgba(255, 45, 85, 0.1);
+}
+
+.glow-teal {
+  box-shadow: 0 0 20px var(--color-secure-glow), 
+              0 0 60px rgba(0, 212, 170, 0.1);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px var(--color-warn-glow), 
+              0 0 60px rgba(255, 176, 32, 0.1);
+}
+
+.glow-blue {
+  box-shadow: 0 0 20px var(--color-info-glow), 
+              0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+/* ── Text Glow ───────────────────────────────────────────────── */
+
+.text-glow-red {
+  text-shadow: 0 0 8px var(--color-threat-glow),
+               0 0 20px rgba(255, 45, 85, 0.3);
+}
+
+.text-glow-teal {
+  text-shadow: 0 0 8px var(--color-secure-glow),
+               0 0 20px rgba(0, 212, 170, 0.3);
+}
+
+/* ── Animated Pulse Ring ─────────────────────────────────────── */
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+/* ── Scan Line Effect ────────────────────────────────────────── */
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-secure-500), transparent);
+  opacity: 0.4;
+  animation: scan 3s linear infinite;
+}
+
+/* ── Fade-in Animation ───────────────────────────────────────── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+/* ── Staggered Children ──────────────────────────────────────── */
+
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 80ms; }
+.stagger > *:nth-child(3) { animation-delay: 160ms; }
+.stagger > *:nth-child(4) { animation-delay: 240ms; }
+.stagger > *:nth-child(5) { animation-delay: 320ms; }
+.stagger > *:nth-child(6) { animation-delay: 400ms; }
+.stagger > *:nth-child(7) { animation-delay: 480ms; }
+.stagger > *:nth-child(8) { animation-delay: 560ms; }
